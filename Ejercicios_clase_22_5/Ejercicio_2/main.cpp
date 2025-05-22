@@ -1,3 +1,12 @@
+// Write a C++ program that asks the user to enter 3 words. The program must:
+// 1. Indicate the length of each word.
+// 2. If the word is longer than 5 characters, display it in uppercase.
+// 3. Upon completion, display the shortest word entered.
+// To do this, you must use at least the following functions:
+//  A function that receives a word and returns its length.
+//  A function that receives a word and returns it in uppercase (without modifying the original).
+
+
 #include <iostream>
 #include <string>
 using namespace std;
