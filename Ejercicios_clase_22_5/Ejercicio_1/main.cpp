@@ -1,3 +1,14 @@
+// Task 1
+// Write a C++ program that allows the user to enter 5 positive integers. The program must:
+// 1. Calculate and report the double of each number entered.
+// 2. Report the largest of the five numbers.
+// 3. If the number is even, also display its half.
+// To do this, you must use at least two functions:
+//  A function that receives a number and returns its double.
+//  A function that receives a number and returns true if it is even and false if it is odd.
+// You can add other functions if you think it is necessary.
+
+
 #include <iostream>
 using namespace std;
 
