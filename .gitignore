@@ -1,0 +1,8 @@
+# Ignore compiled binaries
+*.exe
+*.out
+*.o
+*.obj
+
+# Ignore output directories
+/output/
