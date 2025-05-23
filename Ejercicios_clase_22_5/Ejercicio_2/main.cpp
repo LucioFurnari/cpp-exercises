@@ -11,29 +11,47 @@
 #include <string>
 using namespace std;
 
-// int get_word_length(string word) {
+int get_word_length(string word) {
+  int wordCount = 0;
+  while(word[wordCount] != '\0') {
+    wordCount++;
+  }
+  return wordCount;
+}
 
-// }
-
+// The function iterate each char and transform it to upper case
 string in_upper_case(string word) {
-  for (int i = 0; i < word.length()-1; i++)
+  for (size_t i = 0; i < word.length(); i++)
   {
     word[i] = toupper(word[i]);
   }
-  
+  return word;
 }
 
 int main() {
+  // Array to store each word that the user enter
+  string wordsList[3];
   string word;
 
-  word = "Hola";
+  cout << "Enter 3 words: ";
 
-  cout << word[4];
+  for (int k=0; k < 3; k++) {
+    cin >> word;
+    wordsList[k] = word;
+  }
 
-  // cout << "Ingrese 3 palabras: ";
-  // for (int k=0; k < 3; k++) {
-  //   cin >> word;
-  // }
+  string shorterWord = wordsList[0];
 
+  for(int w=0; w < 3; w++) {
+    if (wordsList[w].length() < shorterWord.length()) {
+      shorterWord = wordsList[w];
+    }
+    cout << "The word " << wordsList[w] << " have " << get_word_length(wordsList[w]) << " chars." << endl;
+    if(wordsList[w].length() > 5) {
+      cout << in_upper_case(wordsList[w]) << endl;
+    }
+  }
+
+  cout << "The smallest word is: " << shorterWord << endl;
   return 0;
 }
