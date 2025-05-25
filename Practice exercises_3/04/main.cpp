@@ -15,10 +15,29 @@ int main() {
 
   cout << "Enter the first age: " << endl;
   cin >> ageOne;
+  while (ageOne < 0)
+  {
+    cout << "You enter a negative age, enter a positive age: " << endl;
+    cin >> ageOne;
+  }
+
   cout << "Enter the second age: " << endl;
   cin >> ageTwo;
+
+  while (ageTwo < 0)
+  {
+    cout << "You enter a negative age, enter a positive age: " << endl;
+    cin >> ageTwo;
+  }
+
   cout << "Enter the third age: " << endl;
   cin >> ageThree;
+
+  while (ageThree < 0)
+  {
+    cout << "You enter a negative age, enter a positive age: " << endl;
+    cin >> ageThree;
+  }
 
   cout << "The average of the ages is: " << average_age(ageOne, ageTwo, ageThree) << endl;
   return 0;
