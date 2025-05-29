@@ -28,13 +28,23 @@ void show_menu() {
   cout << "D: Exit the program." << endl;
 }
 
-int invert_number(int number) {
+int invert_number(int & number) {
   int revNum = 0;
   while (number > 0) {
       revNum = revNum * 10 + number % 10;
       number = number / 10;
   }
   return revNum;
+}
+
+int sum_of_digits(int & number) {
+  int result { 0 };
+  while (number > 0) {
+    int digit = number % 10;
+    result += digit;
+    number = number / 10;
+  }
+  return result;
 }
 
 void select_option(char option) {
@@ -48,6 +58,12 @@ void select_option(char option) {
     cout << "The number in reverse: " << invert_number(number) << endl;
   }
     break;
+  case 'B': {
+    int number {};
+    cout << "Enter a number: " << endl;
+    cin >> number;
+    cout << "The sum of their digits is: " << sum_of_digits(number) << endl;
+  }
   default:
     break;
   }
