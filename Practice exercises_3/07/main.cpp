@@ -37,15 +37,17 @@ int invert_number(int number) {
   return revNum;
 }
 
-void select_option() {
-  char option {};
-  cin >> option;
+void select_option(char option) {
+
   switch (toupper(option))
   {
-  case 'A':
-    
+  case 'A': {
+    int number {};
+    cout << "Enter a number: " << endl;
+    cin >> number;
+    cout << "The number in reverse: " << invert_number(number) << endl;
+  }
     break;
-  
   default:
     break;
   }
@@ -57,6 +59,7 @@ int main() {
   do {
     show_menu();
     cin >> option;
+    select_option(option);
   } while(toupper(option) != 'D');
 
 
