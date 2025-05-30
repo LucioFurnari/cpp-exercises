@@ -47,6 +47,10 @@ int sum_of_digits(int & number) {
   return result;
 }
 
+bool numbers_are_multiples(int numberOne, int numberTwo) {
+  return numberTwo % numberOne == 0;
+}
+
 void select_option(char option) {
 
   switch (toupper(option))
@@ -57,13 +61,28 @@ void select_option(char option) {
     cin >> number;
     cout << "The number in reverse: " << invert_number(number) << endl;
   }
-    break;
+  break;
   case 'B': {
     int number {};
     cout << "Enter a number: " << endl;
     cin >> number;
     cout << "The sum of their digits is: " << sum_of_digits(number) << endl;
   }
+  break;
+  case 'C': {
+    int numberOne{}, numberTwo{};
+    cout << "Enter two numbers: " << endl;
+    cout << "Enter number one: ";
+    cin >> numberOne;
+    cout << "Enter number two: ";
+    cin >> numberTwo;
+    if(numbers_are_multiples(numberOne, numberTwo)) {
+      cout << "The number one is multiple of number two." << endl;
+    } else {
+      cout << "The number one IS NOT multiple of number two." << endl;
+    }
+  }
+  break;
   default:
     break;
   }
