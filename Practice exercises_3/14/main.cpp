@@ -31,12 +31,22 @@ void add_amount() {
   cout << "Your balance is: " << balance << endl;
 }
 
-void remove_amount(float amount) {
+void remove_amount() {
+  float amount {};
+
+  cout << "Enter an amount: ";
+  cin >> amount;
   // Check if have money.
   if (balance == 0 || balance - amount < 0) {
     cout << "You have no money." << endl;
+  } else {
+    balance -= amount;
   }
-  balance -= amount;
+  cout << "Your balance is: " << balance << endl;
+}
+
+void display_balance() {
+  cout << "Your current balance is: " << balance << endl;
 }
 
 void show_menu() {
@@ -52,7 +62,12 @@ void select_option(char & option) {
   case 'A':
     add_amount();
     break;
-  
+  case 'B':
+    remove_amount();
+    break;
+  case 'C':
+    display_balance();
+    break;
   default:
     break;
   }
