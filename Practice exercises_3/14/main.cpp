@@ -16,8 +16,19 @@ using namespace std;
 
 float balance = { 0 };
 
-void add_amount(float amount) {
+void add_amount() {
+  float amount {};
+
+  cout << "Enter an amount: ";
+  cin >> amount;
+  // while (!amount)
+  // {
+  //   cout << "Enter a valid amount: ";
+  //   cin >> amount;
+  // }
+
   balance += amount;
+  cout << "Your balance is: " << balance << endl;
 }
 
 void remove_amount(float amount) {
@@ -35,6 +46,18 @@ void show_menu() {
   cout << "D: Exit the program." << endl;
 }
 
+void select_option(char & option) {
+  switch (toupper(option))
+  {
+  case 'A':
+    add_amount();
+    break;
+  
+  default:
+    break;
+  }
+}
+
 int main() {
   char option {};
 
@@ -43,6 +66,7 @@ int main() {
   do {
     show_menu();
     cin >> option;
+    select_option(option);
   } while(toupper(option) != 'D');
 
   return 0;
