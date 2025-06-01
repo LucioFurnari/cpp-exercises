@@ -16,14 +16,21 @@ bool check_number(int & number) {
   return (digits < 10 || digits > 50);
 }
 
-
+void count_odd_numbers(int number, int & counter) {
+  if (number % 2 != 0) {
+    counter++;
+  }
+}
 int main() {
   int number {0};
+  int oddNumbersCounter { 0 };
 
   do {
     cout << "Enter a number: ";
     cin >> number;
+    count_odd_numbers(number, oddNumbersCounter);
   } while(!check_number(number));
 
+  cout << "The number of odd number you enter is: " << oddNumbersCounter << endl;
   return 0;
 }
