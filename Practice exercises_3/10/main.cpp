@@ -6,7 +6,7 @@ using namespace std;
 //  Informar la cantidad de números impares leídos. Utilizá las funciones es_par(número) y
 //  suma_dígitos(número) implementadas anteriormente.
 
-bool check_number(int & number) {
+bool check_number(int number) {
   int digits { 0 };
   while(number > 0) {
     digits += number % 10;
@@ -31,6 +31,7 @@ int main() {
     count_odd_numbers(number, oddNumbersCounter);
   } while(!check_number(number));
 
+  cout << "The sum of the digits of the number: " << number << " is lower than 10 or greater than 50." << endl;
   cout << "The number of odd number you enter is: " << oddNumbersCounter << endl;
   return 0;
 }
