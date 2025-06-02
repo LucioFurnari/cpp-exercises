@@ -38,7 +38,7 @@ void remove_amount() {
   cin >> amount;
   // Check if have money.
   if (balance == 0 || balance - amount < 0) {
-    cout << "You have no money." << endl;
+    cout << "Insufficient funds." << "Current balance:" << balance << endl;
   } else {
     balance -= amount;
   }
