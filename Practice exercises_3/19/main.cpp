@@ -9,28 +9,29 @@ using namespace std;
 //  b) ¿Qué debería modificar del algoritmo anterior para que los ordene en orden
 //  descendente?
 
-// void sort_ascending(int list[10]) {
-
-// }
-
-int main() {
-  int list[10] = {2,5,1,4,4,8,12,9,7,11};
-
-  for(int i=0; i < 10; i++) {
+void sort_ascending(int arr[], int l) {
+  for(int i=0; i < l; i++) {
     int minNumber = i;
 
-    for(int j=i+1; j < 10; j++) {
-      if(list[j] < list[minNumber]) {
+    for(int j=i+1; j < l; j++) {
+      if(arr[j] < arr[minNumber]) {
         minNumber = j;
       }
     }
 
     if(minNumber != i) {
-      int temp = list[minNumber];
-      list[minNumber] = list[i];
-      list[i] = temp;
+      int temp = arr[minNumber];
+      arr[minNumber] = arr[i];
+      arr[i] = temp;
     }
   }
+}
+
+int main() {
+  const int longArr = 10;
+  int list[10] = {2,5,1,4,4,8,12,9,7,11};
+
+  sort_ascending(list, longArr);
 
   for(int k=0; k < 10; k++) {
     cout << list[k] << " ";
@@ -38,5 +39,3 @@ int main() {
 
   return 0;
 }
-// 2,5,1,4,4,8,12,9,7,11 i=0
-// 1,5,2,4,4,8,12,9,7,11 i=1
