@@ -46,9 +46,9 @@ void calculate_doubles(double & numberOne, double & numberTwo, char & option) {
 }
 
 int main() {
-  double numberOne = enter_value();
-  double numberTwo = enter_value();
-  char option = get_option();
+  double numberOne { enter_value() };
+  double numberTwo { enter_value() };
+  char option { get_option() };
   calculate_doubles(numberOne, numberTwo, option);
 
   return 0;
