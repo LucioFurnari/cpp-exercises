@@ -6,14 +6,32 @@ using namespace std;
 // Have the program output the height of the ball above the ground after 0, 1, 2, 3, 4, and 5 seconds. The ball should not go underneath the ground (height 0).
 
 double height_of_the_ball(double height, int second) {
-  return height - (9.8 * (second*second) / 2);
+  double heightOfBall = height - (9.8 * (second*second) / 2);
+
+  if (heightOfBall > 0) {
+    return heightOfBall;
+  } else {
+    return 0;
+  }
+}
+
+void show_height_of_the_ball(int second, double height) {
+  if(height > 0)  {
+    cout << "At " << second << " seconds, the ball is at height: " << height << " meters" << endl;
+  } else {
+    cout << "At " << second << " the ball is on the ground." << endl;
+  }
 }
 
 int main() {
 
-  double height = 100;
-  double result = height_of_the_ball(height, 2);
+  double height;
 
-  cout << "At 2 seconds, the ball is at height: " << result << " meters" << endl;
+  cout << "Enter the height of the tower: ";
+  cin >> height;
+  for(int i=0; i <= 5; i++) {
+    double result = height_of_the_ball(height, i);
+    show_height_of_the_ball(i, result);
+  }
   return 0;
 }
