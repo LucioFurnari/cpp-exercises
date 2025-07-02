@@ -30,7 +30,12 @@ void printOlder(string_view name1, int age1, string_view name2, int age2) {
 }
 
 int main() {
+  string name1 { getName(1) };
+  int age1 { getAge(name1) };
+  string name2 { getName(2) };
+  int age2 { getAge(name2) };
 
+  printOlder(name1, age1, name2, age2);
 
   return 0;
 }
