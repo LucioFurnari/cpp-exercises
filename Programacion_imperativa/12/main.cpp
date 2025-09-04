@@ -12,7 +12,7 @@ using namespace std;
 // H. Hallar en qué fila y columna se encuentra almacenado el mayor elemento.
 
 
-void print_values(int arr[7][10]) {
+void print_values(int arr[7][10]) { // D. Imprimir todos los valores de la matriz, colocando cada fila en una nueva línea. 
   for(int r = 0; r < 7; r++) {
     for(int c = 0; c < 10; c++) {
       cout << arr[r][c] << ", ";
@@ -21,13 +21,23 @@ void print_values(int arr[7][10]) {
   }
 }
 
-void change_columns(int arr[7][10]) {
+void change_columns(int arr[7][10]) { // E. Permutar las columnas 3 y 5.
   for(int r=0; r<7; r++) {
     int temp = arr[r][3];
     arr[r][3] = arr[r][5];
     arr[r][5] = temp;
   }
 }
+
+int add_elements_in_rows(int arr[7][10]) {
+  int result = 0;
+  for(int i=0; i<10; i++) {
+    result = result + (arr[1][i] + arr[5][i]);
+  }
+
+  return result;
+}
+
 
 int main() {
   int rows = 7;
@@ -46,5 +56,7 @@ int main() {
   print_values(arr);
   change_columns(arr);
   print_values(arr);
+
+  cout << "Suma de la fila 2 y 6: " << add_elements_in_rows(arr) << endl;
   return 0;
 }
