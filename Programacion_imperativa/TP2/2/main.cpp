@@ -35,7 +35,8 @@ int main() {
   int dl {0};
   int user_numbers[DF] {};
   int number {};
-  bool select {false};
+  int value {};
+  char selection = 'n';
 
   for(int i=0; i<DF; i++) {
     cout << "Enter a number: " << endl;
@@ -43,8 +44,21 @@ int main() {
     order_arr(user_numbers, dl, number);
   }
 
-  cout << "Wanna find a number ?" << endl;
 
+  cout << "Wanna find a number ? write y or n" << endl;
+  cin >> selection;
+  
+  if(selection == 'y') {
+    cout << "Enter the number to find: ";
+    cin >> value;
+    if(find_number(user_numbers, dl, value)) {
+      cout << "The number was found." << endl;
+    } else {
+      cout << "The number was not found" << endl;
+    }
+  } else {
+    cout << "Have a nice day!" << endl;
+  }
 
   return 0;
 }
