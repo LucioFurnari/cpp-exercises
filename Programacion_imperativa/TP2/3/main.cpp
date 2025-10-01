@@ -18,7 +18,7 @@ int binary_search(int arr[], int value, int dl) {
       if(arr[mid] > value) {
         end = mid - 1;
       } else {
-        start = mid + 1;
+        start = mid;
       }
     }
   }
@@ -28,9 +28,9 @@ int binary_search(int arr[], int value, int dl) {
 
 int main() {
   int dl = 10;
-  int arr[10] = {2,2,1,3,5,6,8,8,9,4};
+  int arr[10] = {2,3,3,3,5,6,8,8,9,4};
 
-  int result = binary_search(arr, 8, dl);
+  int result = binary_search(arr, 3, dl);
   cout << "Result: " << result;
   return 0;
 }
