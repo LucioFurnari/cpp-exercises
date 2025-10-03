@@ -33,7 +33,7 @@ int main() {
 
   int q_of_products;
   int price;
-  int arr[q_of_products] {};
+  int arr[10] {};
 
   cout << "Enter the quantity of products to save: ";
   cin >> q_of_products;
@@ -42,6 +42,12 @@ int main() {
     cout << "Enter the price of the product:";
     cin >> price;
     arr[i] = price;
+  }
+
+  sort_array(arr, q_of_products);
+
+  for(int p=0; p<q_of_products; p++) {
+    cout << "Product n°: " << p << " price: " << arr[p] << endl;
   }
 
   return 0;
