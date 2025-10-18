@@ -17,8 +17,17 @@ struct Book {
   int amountPages;
 };
 
-int main() {
-
+void loadBooks(Book bookList[], int & DL, int & DF) {
   
+}
+
+
+int main() {
+  const int DF {10};
+  int DL {0};
+  Book bookList[DF];
+  
+
+
   return 0;
 }
