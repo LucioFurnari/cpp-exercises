@@ -39,6 +39,10 @@ void getSale(Sale* & sale) {
   cin >> sale->quantity;
 }
 
+void subtractPercent(Sale* & sale) {
+  sale->product.price = sale->product.price * 0.85;
+}
+
 void printDescription(Sale* & sale) {
   cout << sale->product.description << endl;
 }
@@ -46,6 +50,7 @@ void printDescription(Sale* & sale) {
 int main() {
   Sale * sale = new Sale;
   getSale(sale);
+  subtractPercent(sale);
   printDescription(sale);
   return 0;
 }
