@@ -18,13 +18,46 @@ struct Node {
 };
 
 void addToStart(Node* & head, int & value) {
+  Node* node = new Node;
 
+  if(head == nullptr) {
+    node->value = value;
+    node->next = nullptr;
+    head = node;
+  } else {
+    node->value = value;
+    node->next = head;
+    head = node;
+  }
+}
+
+void addToEnd(Node* & head, int & value) {
+  Node* node = new Node;
+
+  if(head == nullptr) {
+    node->value = value;
+    node->next = nullptr;
+    head = node;
+  } else {
+    Node* aux = head;
+    
+    while(aux->next != nullptr) {
+      aux = aux->next;
+    }
+
+    node->value = value;
+    node->next = nullptr;
+    aux->next = node;
+  }
 }
 
 void showList(Node* & head) {
-  while (head->next != nullptr)
+  Node* aux = head;
+  while (aux != nullptr)
   {
-    cout << head->value << endl;
+
+    cout << aux->value << endl;
+    aux = aux->next;
   }
   
 }
@@ -33,13 +66,17 @@ int main() {
   int value;
   Node* head = nullptr;
 
-  do
+  cout << "Enter a number, that is not 0: ";
+  cin >> value;
+  while (value != 0)
   {
+    // addToStart(head, value);
+    addToEnd(head, value);
     cout << "Enter a number, that is not 0: ";
     cin >> value;
-    addToStart(head, value);
-  } while (value != 0);
-  
+  }
+
+  showList(head);
 
   return 0;
 }
