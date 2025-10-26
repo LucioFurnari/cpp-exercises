@@ -51,6 +51,30 @@ void addToEnd(Node* & head, int & value) {
   }
 }
 
+void addSorted(Node* & head, int & value) {
+  Node* node = new Node;
+
+  if(head == nullptr) {
+    node->value = value;
+    node->next = nullptr;
+    head = node;
+  } else {
+    Node* aux = head;
+
+    while (aux->next != nullptr && value > aux->next->value)
+    {
+      aux = aux->next;
+    }
+    node->value = value;
+    node->next = aux->next;
+    
+    aux->next = node;
+  }
+}
+// 3
+// 2->5
+// 2->3->5
+
 void showList(Node* & head) {
   Node* aux = head;
   while (aux != nullptr)
@@ -71,7 +95,8 @@ int main() {
   while (value != 0)
   {
     // addToStart(head, value);
-    addToEnd(head, value);
+    // addToEnd(head, value);
+    addSorted(head, value);
     cout << "Enter a number, that is not 0: ";
     cin >> value;
   }
