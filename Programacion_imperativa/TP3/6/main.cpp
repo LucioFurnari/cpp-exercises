@@ -19,15 +19,30 @@ struct Node
 };
 
 void insertToList(Node* & list, string studentName) {
-  
-}
+  Node* node = new Node;
 
+  if (list == nullptr && studentName != "x") {
+    node->student = studentName;
+    node->next = nullptr;
+    list = node;
+  }
+
+}
 
 int main() {
   Node* listStudents = new Node;
   string studentName;
 
+  cout << "Enter the name of the student, enter x to exit the program.";
+  getline(cin, studentName);
 
+  while (studentName != "x")
+  {
+    insertToList(listStudents, studentName);
+    cout << "Enter the name of the student, enter x to exit the program.";
+    getline(cin, studentName);
+  }
+  
 
   return 0;
 }
