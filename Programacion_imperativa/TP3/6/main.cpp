@@ -25,12 +25,32 @@ void insertToList(Node* & list, string studentName) {
     node->student = studentName;
     node->next = nullptr;
     list = node;
-  }
+  } else {
+    Node* aux = list;
 
+    while(aux->next != nullptr) {
+      aux = aux->next;
+    }
+
+    node->student = studentName;
+    node->next = nullptr;
+    aux->next = node;
+  }
+}
+
+void showList(Node* & list) {
+  Node* aux = list;
+
+  while (aux != nullptr)
+  {
+    cout << aux->student << ", ";
+    aux = aux->next;
+  }
+  
 }
 
 int main() {
-  Node* listStudents = new Node;
+  Node* listStudents = nullptr;
   string studentName;
 
   cout << "Enter the name of the student, enter x to exit the program.";
@@ -43,6 +63,6 @@ int main() {
     getline(cin, studentName);
   }
   
-
+  showList(listStudents);
   return 0;
 }
