@@ -35,9 +35,23 @@ void addNumber(Node* & list, int & number) {
   }
 }
 
+bool findNumber(Node* & list, int & number) {
+  Node* aux = list;
+
+  while(aux != nullptr) {
+    if(aux->number == number) {
+      return true;
+    }
+    aux = aux->next;
+  }
+
+  return false;
+}
+
 int main() {
   Node* numberList = nullptr;
   int number {};
+  int numberToFind {};
 
   cout << "Enter a number greater or equal to 0: ";
   cin >> number;
@@ -45,6 +59,15 @@ int main() {
     addNumber(numberList, number);
     cout << "Enter a number greater or equal to 0: ";
     cin >> number;
+  }
+
+  cout << "Enter the number you want to find: ";
+  cin >> numberToFind;
+
+  if(findNumber(numberList, numberToFind)) {
+    cout << "The number was found." << endl;
+  } else {
+    cout << "The number not exist in the list." << endl;
   }
 
   return 0;
