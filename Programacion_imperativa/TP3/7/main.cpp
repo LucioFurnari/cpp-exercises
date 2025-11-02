@@ -48,8 +48,62 @@ bool findNumber(Node* & list, int & number) {
   return false;
 }
 
+int findOccurrence(Node* & list, int & numberToFind) {
+  int count {0};
+  Node* aux = list;
+
+  while(aux != nullptr) {
+    if(aux->number == numberToFind) count++;
+    aux = aux->next;
+  }
+
+  return count;
+}
+
+// i don't know how to return two list, so i pass the list that i want to change in the function.
+void generateNewList(Node* & head, Node* & evenList, Node* & oddList) {
+
+  while (head != nullptr)
+  {
+    Node* newNumber = new Node;
+    newNumber->number = head->number;
+    newNumber->next = nullptr;
+
+    if(head->number % 2 == 0) {
+      if(evenList != nullptr) {
+        evenList->next = newNumber;
+      } else {
+        evenList = newNumber;
+      }
+    } else {
+      if(oddList != nullptr) {
+        oddList->next = newNumber;
+      } else {
+        oddList = newNumber;
+      }
+    }
+
+    head = head->next;
+  }
+  
+}
+
+void showList(Node* & list) {
+  Node* aux = list;
+
+  while (aux != nullptr)
+  {
+    cout << "List N°: " << aux->number << endl;
+    aux = aux->next;
+  }
+  
+  cout << "Finalize showing the list." << endl;
+}
+
 int main() {
   Node* numberList = nullptr;
+  Node* evenList = nullptr;
+  Node* oddList = nullptr;
   int number {};
   int numberToFind {};
 
@@ -69,6 +123,9 @@ int main() {
   } else {
     cout << "The number not exist in the list." << endl;
   }
+
+  generateNewList(numberList, evenList, oddList);
+  showList(numberList);
 
   return 0;
 }
