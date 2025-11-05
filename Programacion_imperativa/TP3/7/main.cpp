@@ -18,7 +18,7 @@ struct Node
   Node* next;
 };
 
-void addNumber(Node* & list, int & number) {
+void addNumber(Node* & list, int number) {
   Node* newNumber = new Node;
   newNumber->number = number;
   newNumber->next = nullptr;
@@ -35,7 +35,7 @@ void addNumber(Node* & list, int & number) {
   }
 }
 
-bool findNumber(Node* & list, int & number) {
+bool findNumber(Node* list, int number) {
   Node* aux = list;
 
   while(aux != nullptr) {
@@ -48,7 +48,7 @@ bool findNumber(Node* & list, int & number) {
   return false;
 }
 
-int findOccurrence(Node* & list, int & numberToFind) {
+int findOccurrence(Node* list, int numberToFind) {
   int count {0};
   Node* aux = list;
 
@@ -60,44 +60,58 @@ int findOccurrence(Node* & list, int & numberToFind) {
   return count;
 }
 
-// i don't know how to return two list, so i pass the list that i want to change in the function.
+// Distribuye los nodos de "head" en dos listas: evenList y oddList.
+// Los nodos son movidos (no se crean nuevos). Al finalizar head queda en nullptr.
 void generateNewList(Node* & head, Node* & evenList, Node* & oddList) {
+  Node* evenTail = nullptr;
+  Node* oddTail = nullptr;
 
   while (head != nullptr)
   {
-    Node* newNumber = new Node;
-    newNumber->number = head->number;
-    newNumber->next = nullptr;
+    Node* cur = head;
+    head = head->next; // avanzar en la original
+    cur->next = nullptr; // separar el nodo actual
 
-    if(head->number % 2 == 0) {
-      if(evenList != nullptr) {
-        evenList->next = newNumber;
+    if (cur->number % 2 == 0) {
+      if (evenList == nullptr) {
+        evenList = evenTail = cur;
       } else {
-        evenList = newNumber;
+        evenTail->next = cur;
+        evenTail = cur;
       }
     } else {
-      if(oddList != nullptr) {
-        oddList->next = newNumber;
+      if (oddList == nullptr) {
+        oddList = oddTail = cur;
       } else {
-        oddList = newNumber;
+        oddTail->next = cur;
+        oddTail = cur;
       }
     }
-
-    head = head->next;
   }
-  
+
+  // head ya es nullptr; la lista original quedó vacía
 }
 
-void showList(Node* & list) {
+void showList(Node* list, const string & title = "Lista") {
+  cout << "-- " << title << " --" << endl;
+  if (list == nullptr) {
+    cout << "(vacía)" << endl;
+  }
   Node* aux = list;
-
   while (aux != nullptr)
   {
-    cout << "List N°: " << aux->number << endl;
+    cout << aux->number << (aux->next ? " -> " : "") ;
     aux = aux->next;
   }
-  
-  cout << "Finalize showing the list." << endl;
+  cout << endl;
+}
+
+void freeList(Node* & head) {
+  while (head != nullptr) {
+    Node* aux = head;
+    head = head->next;
+    delete aux; // libera la memoria del nodo
+  }
 }
 
 int main() {
@@ -105,27 +119,40 @@ int main() {
   Node* evenList = nullptr;
   Node* oddList = nullptr;
   int number {};
-  int numberToFind {};
 
-  cout << "Enter a number greater or equal to 0: ";
-  cin >> number;
-  while(number >= 0) {
-    addNumber(numberList, number);
-    cout << "Enter a number greater or equal to 0: ";
+  cout << "Ingrese números (termina con un número negativo):" << endl;
+  while(true) {
     cin >> number;
+    if (!cin) return 0; // entrada inválida
+    if (number < 0) break;
+    addNumber(numberList, number);
   }
 
-  cout << "Enter the number you want to find: ";
+  int numberToFind {};
+  cout << "A) Ingrese número a buscar: ";
   cin >> numberToFind;
-
-  if(findNumber(numberList, numberToFind)) {
-    cout << "The number was found." << endl;
+  if (findNumber(numberList, numberToFind)) {
+    cout << "El número fue encontrado." << endl;
   } else {
-    cout << "The number not exist in the list." << endl;
+    cout << "El número no existe en la lista." << endl;
   }
 
+  int numberToCount {}; 
+  cout << "B) Ingrese número para contar sus ocurrencias: ";
+  cin >> numberToCount;
+  cout << "Ocurrencias: " << findOccurrence(numberList, numberToCount) << endl;
+
+  // C) distribuir nodos en pares e impares (moviéndolos)
   generateNewList(numberList, evenList, oddList);
-  showList(numberList);
+
+  showList(numberList, "Lista original (debería estar vacía)");
+  showList(evenList, "Pares");
+  showList(oddList, "Impares");
+
+  // liberar memoria
+  freeList(numberList);
+  freeList(evenList);
+  freeList(oddList);
 
   return 0;
 }
