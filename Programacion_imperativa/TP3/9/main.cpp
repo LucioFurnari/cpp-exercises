@@ -33,6 +33,31 @@ void organizeList(Node* & list, Node * newNode) {
   }
 }
 
+void removeMultipleOfThree(Node* & list) {
+  Node* aux = list;
+  Node* selected = nullptr;
+
+  while (aux != nullptr)
+  {
+    if(list->value % 3 == 0) {
+      selected = list;
+      list = list->next;
+      aux = list;
+      delete selected;
+    } else {
+      if(aux->next != nullptr && aux->next->value % 3 == 0) {
+        selected = aux->next;
+        aux->next = selected->next;
+        delete selected;
+      } else {
+        aux = aux->next;
+      }
+    }
+  }
+  
+
+}
+
 void showList(Node* & list) {
   Node* aux = list;
   while (aux != nullptr)
@@ -67,6 +92,8 @@ int main() {
   Node* list = nullptr;
 
   createList(list);
+  showList(list);
+  removeMultipleOfThree(list);
   showList(list);
   return 0;
 }
