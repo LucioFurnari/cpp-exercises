@@ -88,6 +88,16 @@ void createList(Node* & list) {
   
 }
 
+void cleanList(Node* & list) {
+  while (list != nullptr)
+  {
+    Node* aux = list;
+    list = list->next;
+    delete aux;
+  }
+  
+}
+
 int main() {
   Node* list = nullptr;
 
@@ -95,5 +105,6 @@ int main() {
   showList(list);
   removeMultipleOfThree(list);
   showList(list);
+  cleanList(list);
   return 0;
 }
