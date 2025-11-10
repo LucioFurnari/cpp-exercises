@@ -87,6 +87,16 @@ void showList(Node* & list) {
   
 }
 
+void freeList(Node* & list) {
+  while (list != nullptr)
+  {
+    Node* tmp = list;
+    list = list->next;
+    delete tmp;
+  }
+  
+}
+
 int main() {
   Node* list = nullptr;
   string word;
@@ -104,5 +114,6 @@ int main() {
   showList(list);
   Node* newList = generateNewList(list);
   showList(newList);
+  freeList(list);
   return 0;
 }
