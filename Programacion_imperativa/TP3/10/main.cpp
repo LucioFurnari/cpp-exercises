@@ -15,7 +15,7 @@ struct Node
 
 string lowerCaseWord(string word) {
 
-  for (int i = 0; i < word.length(); i++)
+  for (int i=0; i < word.size(); i++)
   {
     word[i] = tolower(word[i]);
   }
@@ -27,6 +27,7 @@ void addToList(Node* & list, string word) {
   
   if (list == nullptr) {
     Node* newNode = new Node{lowerCaseWord(word), nullptr};
+    list = newNode;
   } else {
     Node* aux = list;
 
@@ -41,11 +42,67 @@ void addToList(Node* & list, string word) {
   }
 }
 
+bool checkIfExist(Node* & listToCheck, string word) {
 
+  Node* aux = listToCheck;
+
+  while (aux != nullptr)
+  {
+    if(aux->word == word) {
+      return true;
+    }
+    aux = aux->next;
+  }
+  return false;
+}
+
+Node* generateNewList(Node* list) {
+  Node* newList = nullptr;
+  
+  Node* aux = list;
+  while (aux != nullptr)
+  {
+    
+    if(checkIfExist(aux->next, aux->word) && !checkIfExist(newList, aux->word)) {
+      Node* newNode = new Node{aux->word, newList};
+      newList = newNode;
+    }
+    aux = aux->next;
+  }
+  return newList;
+}
+
+void showList(Node* & list) {
+  Node* aux = list;
+
+  while (aux != nullptr)
+  {
+    if(aux->next != nullptr) {
+      cout << aux->word << " -> ";
+    } else {
+      cout << aux->word;
+    }
+    aux = aux->next;
+  }
+  
+}
 
 int main() {
   Node* list = nullptr;
-  Node* repeatedList = nullptr;
+  string word;
 
+  while (true)
+  {
+    cout << "Enter a word: ";
+    getline(cin, word);
+    if(word == "exit") {
+      break;
+    }
+    addToList(list, word);
+  }
+  
+  showList(list);
+  Node* newList = generateNewList(list);
+  showList(newList);
   return 0;
 }
