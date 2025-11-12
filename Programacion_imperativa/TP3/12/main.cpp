@@ -64,6 +64,16 @@ void createList(Node* & head) {
   }
 }
 
+void increasePrice(Node* & list, int procentage) {
+  Node* tmp = list;
+
+  while (tmp != nullptr)
+  {
+    tmp->article.price = tmp->article.price * (1 + procentage / 100);
+  }
+  
+}
+
 void showList(Node* & list) {
   Node* tmp = list;
 
@@ -85,5 +95,9 @@ int main() {
   createList(head);
   showList(head);
 
+  int percentage;
+  cout << "Enter the percentage you want to increase the price: ";
+  cin >> percentage;
+  increasePrice(head, percentage);
   return 0;
 }
