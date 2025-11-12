@@ -94,6 +94,17 @@ Node* merge(Node* & listOne, Node* & listTwo) {
   return newNode;
 }
 
+void freeList(Node* & list) {
+  Node* temp = list;
+
+  while (list != nullptr)
+  {
+    list = list->next;
+  }
+
+  delete temp;
+}
+
 int main() {
   Node* listOne = nullptr;
   Node* listTwo = nullptr;
@@ -124,5 +135,8 @@ int main() {
 
   Node* newNode = merge(listOne, listTwo);
   showList(newNode);
+
+  freeList(listOne);
+  freeList(listTwo);
   return 0;
 }
