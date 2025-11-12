@@ -17,7 +17,7 @@ struct Article
 {
   int code;
   string description;
-  int price;
+  double price;
   int stock;
 };
 
@@ -64,12 +64,46 @@ void createList(Node* & head) {
   }
 }
 
-void increasePrice(Node* & list, int procentage) {
+void increasePrice(Node* & list, double procentage) {
   Node* tmp = list;
 
   while (tmp != nullptr)
   {
     tmp->article.price = tmp->article.price * (1 + procentage / 100);
+    tmp = tmp->next;
+  }
+}
+
+void increaseStockOfArticle(Node* & list, int code, int increase) {
+  Node* tmp = list;
+
+  while (tmp != nullptr)
+  {
+    if(tmp->article.code == code) {
+      tmp->article.stock += increase;
+    }
+    tmp = tmp->next;
+  }
+  
+  cout << "The article don't exist.";
+}
+
+void deleteArticleWithoutStock(Node* & list) {
+  Node* tmp = list;
+
+  while (tmp != nullptr)
+  {
+    if(tmp->article.stock == 0) {
+      Node* aux = tmp;
+      tmp = tmp->next;
+      delete aux;
+    }
+    if(tmp->next->article.stock == 0) {
+      Node* aux = tmp->next;
+      tmp->next = aux->next;
+      tmp = tmp->next;
+      delete aux;
+    }
   }
   
 }
@@ -99,5 +133,8 @@ int main() {
   cout << "Enter the percentage you want to increase the price: ";
   cin >> percentage;
   increasePrice(head, percentage);
+  showList(head);
+  deleteArticleWithoutStock(head);
+  showList(head);
   return 0;
 }
