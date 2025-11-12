@@ -95,14 +95,13 @@ Node* merge(Node* & listOne, Node* & listTwo) {
 }
 
 void freeList(Node* & list) {
-  Node* temp = list;
-
   while (list != nullptr)
   {
+    Node* temp = list;
     list = list->next;
+    delete temp;
   }
 
-  delete temp;
 }
 
 int main() {
