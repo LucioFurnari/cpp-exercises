@@ -37,13 +37,66 @@ void showList(Node* & list) {
   Node* temp = list;
   while (temp != nullptr)
   {
-    cout << temp->word << " -> ";
-    temp = temp->next;
+    if(temp->next == nullptr) {
+      cout << temp->word << endl;
+      temp = temp->next;
+    } else {
+      cout << temp->word << " -> ";
+      temp = temp->next;
+    }
   }
 }
 
+void insertToEnd(Node* & list, Node* newList) {
+  if (list == nullptr) {
+    list = newList;
+  } else {
+    Node* aux = list;
+    while (aux->next != nullptr)
+    {
+      aux = aux->next;
+    }
+  
+    aux->next = newList;
+  }
+}
+
+Node* merge(Node* & listOne, Node* & listTwo) {
+  Node* newNode = nullptr;
+  Node* aux = nullptr;
+
+  Node* tempOne = listOne;
+  Node* tempTwo = listTwo;
+
+  while (tempOne != nullptr && tempTwo != nullptr)
+  {
+    if(tempOne->word <= tempTwo->word) {
+      aux = tempOne;
+      tempOne = tempOne->next;
+    } else {
+      aux = tempTwo;
+      tempTwo = tempTwo->next;
+    }
+
+    aux->next = nullptr;
+    insertToEnd(newNode, aux);
+  }
+  
+  if(tempOne != nullptr) {
+    cout << "Testing TempOne" << endl;
+    insertToEnd(newNode, tempOne);
+  }
+  if(tempTwo != nullptr) {
+    cout << "Testing TempTwo" << endl;
+    insertToEnd(newNode, tempTwo);
+  }
+
+  return newNode;
+}
+
 int main() {
-  Node* list = nullptr;
+  Node* listOne = nullptr;
+  Node* listTwo = nullptr;
   string word;
 
   while (true)
@@ -53,9 +106,23 @@ int main() {
     if(word == "exit") {
       break;
     }
-    createOrderList(list, word);
+    createOrderList(listOne, word);
+  }
+  cout << endl;
+  while (true)
+  {
+    cout << "Enter a word:";
+    getline(cin, word);
+    if(word == "exit") {
+      break;
+    }
+    createOrderList(listTwo, word);
   }
   
-  showList(list);
+  showList(listOne);
+  showList(listTwo);
+
+  Node* newNode = merge(listOne, listTwo);
+  showList(newNode);
   return 0;
 }
