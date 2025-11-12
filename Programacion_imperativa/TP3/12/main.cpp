@@ -101,9 +101,11 @@ void deleteArticleWithoutStock(Node* & list) {
     if(tmp->next->article.stock == 0) {
       Node* aux = tmp->next;
       tmp->next = aux->next;
+      aux->next = nullptr;
       tmp = tmp->next;
       delete aux;
     }
+    tmp = tmp->next;
   }
   
 }
