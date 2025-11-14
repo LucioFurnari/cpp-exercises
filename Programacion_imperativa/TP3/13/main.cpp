@@ -54,18 +54,78 @@ void showList(Node* & list) {
   while (tmp != nullptr)
   {
     cout << "Product code: " << tmp->sale.productCode << endl;
-    cout << "Product sales: " << tmp->sale.amount << endl;
+    // cout << "Product sales: " << tmp->sale.amount << endl;
     tmp = tmp->next;
   }
+}
+
+void insertList(Node* & list, Node* newNode) {
   
+  if(list == nullptr) {
+    list = newNode;
+  } else {
+    Node* tmp = list;
+
+    while (tmp->next != nullptr)
+    {
+      tmp = tmp->next;
+    }
+
+    tmp->next = newNode;
+  }
+}
+
+Node* mergeList(Node* & listOne, Node* & listTwo) {
+  Node* newList = nullptr;
+
+  while (listOne != nullptr && listTwo != nullptr)
+  {
+    if(listOne->sale.productCode <= listTwo->sale.productCode) {
+      Node* aux = listOne;
+      listOne = listOne->next;
+      aux->next = nullptr;
+      insertList(newList, aux);
+    } else {
+      Node* aux = listTwo;
+      listTwo = listTwo->next;
+      aux->next = nullptr;
+      insertList(newList, aux);
+    }
+  }
+
+  if(listOne != nullptr) {
+    insertList(newList, listOne);
+  }
+  if(listTwo != nullptr) {
+    insertList(newList, listTwo);
+  }
+
+  return newList;
+}
+
+void freeList(Node* & list) {
+  while (list != nullptr)
+  {
+    Node* tmp = list;
+    list = list->next;
+    delete tmp;
+  }
+  
+  delete tmp;
 }
 
 int main() {
   Node* listOne = nullptr;
-  // Node* listTwo = nullptr;
+  Node* listTwo = nullptr;
 
   createList(listOne);
+  createList(listTwo);
   showList(listOne);
+  showList(listTwo);
+  Node* mergedList = mergeList(listOne, listTwo);
+  showList(mergedList);
 
+  freeList(listOne);
+  freeList(listTwo);
   return 0;
 }
