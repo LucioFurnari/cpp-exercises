@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -27,14 +28,14 @@ struct Node
   Node* next;
 };
 
-void enterGrade(int & subject) {
+void enterGrade(int & subject, string subjectName) {
   int grade;
 
-  cout << "Enter the grade of the subject (greater than 1 and less or equal to 10)";
+  cout << "Enter the grade of the subject " << subjectName <<" (greater than 1 and less or equal to 10)";
   cin >> grade;
   while (grade < 1 || grade > 10)
   {
-    cout << "Enter the grade of the subject (greater than 1 and less or equal to 10)";
+    cout << "Enter again the grade of the subject " << subjectName <<" (greater than 1 and less or equal to 10)";
     cin >> grade;
   }
   
@@ -44,35 +45,33 @@ void enterGrade(int & subject) {
 Student createStudent() {
   Student student;
 
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
   cout << "Enter the legajo: ";
   getline(cin, student.legajo);
   cout << "Enter the last name of the student: ";
   getline(cin, student.lastName);
   cout << "Enter the name of the student: ";
   getline(cin, student.name);
-  enterGrade(student.mathGrade);
-  enterGrade(student.literatureGrade);
-  enterGrade(student.geographyGrade);
+  enterGrade(student.mathGrade, "Math");
+  enterGrade(student.literatureGrade, "Literature");
+  enterGrade(student.geographyGrade, "Geography");
 
   return student;
 }
 
 void createList(Node* & list) {
   if(list == nullptr) {
-    list->student = createStudent();
-    list->next = nullptr;
-  } else {
-    Node* aux = list;
-    for (int i = 0; i < 4; i++)
+    list = new Node{createStudent(), nullptr};
+  } 
+  Node* aux = list;
+  for (int i = 0; i < 4; i++)
+  {
+    while (aux->next != nullptr)
     {
-      while (aux->next != nullptr)
-      {
-        aux = aux->next;
-      }
-      Student student = createStudent();
-      aux->next = new Node{student, nullptr};
+      aux = aux->next;
     }
-    
+    Student student = createStudent();
+    aux->next = new Node{student, nullptr};
   }
 }
 
