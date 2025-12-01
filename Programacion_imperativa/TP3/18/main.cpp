@@ -22,6 +22,40 @@ void createList(Node* & list, string title) {
   }
 }
 
+bool findTitle(Node* & list, string title) {
+  string titleToLower = "";
+
+  for (int i = 0; i < title.length(); i++)
+  {
+    titleToLower += tolower(title[i]);
+  }
+
+  cout << "Title to find: " << titleToLower << endl;
+
+  Node* tmp = list->next;
+
+  do
+  {
+    string tmpTitle = "";
+
+    for (int i = 0; i < tmp->title.length(); i++)
+    {
+      tmpTitle += tolower(tmp->title[i]);
+    }
+    
+    cout << "Actual title: " << tmpTitle << endl;
+
+    if(titleToLower == tmpTitle) {
+      return true;
+    }
+
+    tmp = tmp->next;
+  } while (tmp != list->next);
+  
+  
+  return false;
+} 
+
 void showList(Node* & end) {
   Node* tmp = end->next;
 
@@ -44,5 +78,15 @@ int main() {
   }
   
   showList(head);
+
+  string titleToFind;
+  cout << "Enter title to find: ";
+  getline(cin, titleToFind);
+
+  if(findTitle(head, titleToFind)) {
+    cout << "Title found" << endl;
+  } else {
+    cout << "Title not found" << endl;
+  }
   return 0;
 }
